@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title }}</title>
+    <link rel="stylesheet" href="{{ 'style.css' | asset_url }}">
+
+    <!-- Add your custom CSS and JavaScript files here -->
+
+    <meta name="description" content="Welcome Enosh - The basic shopify theme.">
+    <meta name="keywords" content="shop, products, online store">
+    <meta name="author" content="Enosh Sugnakar">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/collections/all">Shop</a></li>
+                <li><a href="/pages/about-us">About Us</a></li>
+                <li><a href="/pages/contact-us">Contact Us</a></li>
+            </ul>
+        </nav>
+        <div id="cart">
+            <a href="/cart">
+                <img src="{{ 'cart-icon.png' | asset_url }}" alt="Cart">
+                <span>{{ cart.item_count }}</span>
+            </a>
+        </div>
+    </header>
+
+    <main>
+        <section id="featured-products">
+            <h1>Welcome to Our Shop</h1>
+            <div class="product-list">
+                {% for product in collections['featured-products'].products %}
+                    <div class="product">
+                        <img src="{{ product.featured_image.src | product_img_url: 'medium' }}" alt="{{ product.title }}" class="product-image">
+                        <h2>{{ product.title }}</h2>
+                        <p>{{ product.price | money }}</p>
+                        <a href="{{ product.url }}">View Product</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <img src="{{ 'footer-logo.png' | asset_url }}" alt="Footer Logo">
+            </div>
+            <div class="footer-links">
+                <ul>
+                    <li><a href="/pages/terms">Terms of Service</a></li>
+                    <li><a href="/pages/privacy-policy">Privacy Policy</a></li>
+                    <li><a href="/pages/returns">Return Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-social">
+                <a href="#" class="social-icon"><img src="{{ 'facebook-icon.png' | asset_url }}" alt="Facebook"></a>
+                <a href="#" class="social-icon"><img src="{{ 'twitter-icon.png' | asset_url }}" alt="Twitter"></a>
+                <a href="#" class="social-icon"><img src="{{ 'instagram-icon.png' | asset_url }}" alt="Instagram"></a>
+            </div>
+        </div>
+        <div class="footer-text">
+            &copy; {{ 'now' | date: '%Y' }} KrossKingdom. All Rights Reserved.
+        </div>
+    </footer>
+
+    <script src="{{ 'script.js' | asset_url }}"></script>
+    <script>
+        // JavaScript scripts go here
+        document.addEventListener('DOMContentLoaded', function () {
+            // Example: Show a pop-up when clicking on a product image
+            const productImages = document.querySelectorAll('.product-image');
+            productImages.forEach((image) => {
+                image.addEventListener('click', function () {
+                    alert('Product image clicked!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
